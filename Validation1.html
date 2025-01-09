@@ -1,0 +1,96 @@
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="Validation1.css">
+</head>
+
+<body>
+    <div class="myClass">
+        <h1>Registration Form</h1>
+        <form id="registrationForm">
+
+        <label>Name</label><br>
+        <input type="text" id="name" placeholder="Enter you Full Name."><br><br>
+
+        <label>Password</label><br>
+        <input type="password" id="password" placeholder="Enter the Password"><br><br>
+
+        <label>Confirm Password</label><br>
+        <input type="password" id="cpassword" placeholder="Confirm the Password"><br><br>
+
+        <label>Email Id</label><br>
+        <input type="email" id="email" placeholder="Enter the email"><br><br>
+
+        <label>Phone number</label><br>
+        <input type="number" id="phone" placeholder="Enter the Phone number"><br><br>
+
+        <label>DOB</label><br>
+        <input type="date" id="dob" placeholder="Enter the Date of Birth"><br><br>
+
+        <label>Address</label><br>
+        <input type="text" id="address" placeholder="Enter the Address"><br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+</div>
+    <script>
+        ValidateForm = () =>{
+            const name = document.getElementById('name').value;
+            let pattern1 = /^[a-zA-Z\s]{7,}$/;
+            if(!pattern1.test(name)){
+                alert('Name must contains atleast 7 characters');
+                return false;
+            }
+
+            const password = document.getElementById('password').value;
+            if (password.length < 6) {
+                alert('Password Contains atleast 6 characters');
+                return false;
+            }
+
+            const cpassword = document.getElementById('cpassword').value;
+            if (cpassword != password) {
+                alert('Password and Confirm Password must Match');
+                return false;
+            }
+
+            const email = document.getElementById('email').value;
+            const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!pattern.test(email)) {
+                alert('Email must be in the form example@mail.com');
+                return false;
+            }
+
+            const phone = document.getElementById('phone').value;
+            if (phone.length != 10) {
+                alert('Phone Number Contains only 10 digits');
+                return false;
+            }
+
+            const dob = document.getElementById('dob').value;
+            const dobyear = new Date(dob).getFullYear();
+            const curr = new Date().getFullYear();
+            if (dobyear >= curr || isNaN(dobyear)) {
+                alert('DOB must not exceed the Current Year');
+                return false;
+            }
+
+            const address = document.getElementById('address').value;
+            if (address === '') {
+                alert('Address not be empty');
+                return false;
+            }
+            confirm('Registration Success');
+            return true;
+        }
+        document.getElementById("registrationForm").onsubmit = (event)=> {
+            if (!ValidateForm()) {
+                event.preventDefault();
+            }
+        };
+    </script>
+    
+</body>
+</html>

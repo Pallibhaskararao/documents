@@ -1,0 +1,37 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email validation</title>
+</head>
+<body>
+    <div>
+        <h1>Email Validation</h1>
+        <label for="mail">Email</label>
+        <input type="email" id="email" placeholder="Enter The Valid Email"><br><br>
+        <button onclick = Validate()>Submit</button>
+    </div>
+    <script>
+        Validate = () => {
+            const mail = document.getElementById('email').value;
+            if (mail.indexOf('@') === -1) {
+                alert('Email Contains atleast one @');
+                return false;
+            }
+            const dotcount = (mail.match(/\./g) || []).length;
+            if (dotcount < 2) {
+                alert('Email Contains atleast two dots(.)');
+                return false;
+            }
+            if (mail.includes('..') || mail.includes('@@') || mail.includes('.@') || mail.includes('@.')) {
+                alert('Email Not contains consecutive dots or @');
+                return false;
+            }
+            if (mail.startsWith('.') || mail.startsWith('@') || mail.endsWith('.') || mail.endsWith('@')) {
+                alert('Email not starts with @ or dot');
+                return false;
+            }
+            alert('Entered Email is Valid');
+        }
+    </script>
+</body>
+</html>
